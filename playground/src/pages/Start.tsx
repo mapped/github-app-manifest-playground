@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Stack from "react-bootstrap/Stack";
 import React from "react";
-import { Alert } from "react-bootstrap";
+import { Alert, Badge } from "react-bootstrap";
 
 interface StartProps {}
 
@@ -15,13 +15,21 @@ interface StartState {
   copied: boolean;
   displayRedirectHint: boolean;
   redirectUrl: string;
+  uriFromUrl: string;
+  manifestRawFromUrl: string;
 }
 
 export class Start extends React.Component<StartProps, StartState> {
   constructor(props: StartProps) {
     super(props);
 
-    const redirectUrl = `${window.location.href}callback`;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const uriFromUrl = urlParams.get("url");
+    const manifestRawFromUrl = urlParams.get("manifestRaw");
+
+    window.history.pushState("", "", process.env.PUBLIC_URL);
+    const redirectUrl = `${window.location.href}`;
 
     let defaultManifestRaw = JSON.stringify(
       JSON.parse(`{
@@ -30,9 +38,9 @@ export class Start extends React.Component<StartProps, StartState> {
       "hook_attributes": {
         "url": "https://example.com/github/events"
       },
-      "redirect_url": "https://example.com/redirect",
+      "redirect_url": "${redirectUrl}",
       "callback_urls": [
-        "${redirectUrl}"
+        "https://example.com/callback"
       ],
       "public": true,
       "default_permissions": {
@@ -64,17 +72,16 @@ export class Start extends React.Component<StartProps, StartState> {
       defaultManifestRaw = manifestRawFromStorage;
     }
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const uriFromUrl = urlParams.get("url");
-    const manifestRawFromUrl = urlParams.get("manifestRaw");
+    let importedFromUrl = false;
 
     if (uriFromUrl) {
       defaultUrl = uriFromUrl;
+      importedFromUrl = true;
     }
 
     if (manifestRawFromUrl) {
       defaultManifestRaw = manifestRawFromUrl;
+      importedFromUrl = true;
     }
 
     this.state = {
@@ -85,11 +92,14 @@ export class Start extends React.Component<StartProps, StartState> {
       copied: false,
       displayRedirectHint: false,
       redirectUrl: redirectUrl,
+      uriFromUrl: uriFromUrl ?? "",
+      manifestRawFromUrl: manifestRawFromUrl ?? "",
     };
   }
 
   componentDidMount() {
-    this.validateManifest(this.state.manifestRaw);
+    this.onUrlChange({ target: { value: this.state.url } } as any);
+    this.onManifestChange({ target: { value: this.state.manifestRaw } } as any);
   }
 
   componentDidUpdate() {
@@ -163,7 +173,13 @@ export class Start extends React.Component<StartProps, StartState> {
       <Container className="p-3">
         <Form method="post" action={this.state.url}>
           <Form.Group className="mb-3" controlId="url">
-            <Form.Label>URL</Form.Label>
+            <Form.Label>
+              URL{" "}
+              {this.state.uriFromUrl &&
+                this.state.uriFromUrl === this.state.url && (
+                  <Badge bg="success">Imported from URL</Badge>
+                )}
+            </Form.Label>
             <Form.Control
               type="text"
               placeholder="URL"
@@ -173,7 +189,13 @@ export class Start extends React.Component<StartProps, StartState> {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="manifest">
-            <Form.Label>Manifest</Form.Label>
+            <Form.Label>
+              Manifest{" "}
+              {this.state.manifestRawFromUrl &&
+                this.state.manifestRawFromUrl === this.state.manifestRaw && (
+                  <Badge bg="success">Imported from URL</Badge>
+                )}
+            </Form.Label>
             <Form.Control
               as="textarea"
               rows={15}
