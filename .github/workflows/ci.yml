@@ -30,6 +30,5 @@ jobs:
         env:
           REPO: self
           BRANCH: gh-pages
-          FOLDER: build
+          FOLDER: ${{ env.WORKING_DIR }}/build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        working-directory: ${{ env.WORKING_DIR }}
