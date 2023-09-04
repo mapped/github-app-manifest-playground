@@ -23,7 +23,7 @@
   "overrides": {
     "react-scripts": {
       "why-we-do-it": "To fix nth-check CVE. react-scripts are too lazy to do it. https://github.com/facebook/create-react-app/issues/13337#issuecomment-1693581134",
-      "@svgr/webpack": "6.0.0"
+      "@svgr/webpack": "8.1.0"
     }
   },
   "scripts": {

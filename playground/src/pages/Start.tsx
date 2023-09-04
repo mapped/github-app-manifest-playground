@@ -72,16 +72,12 @@ export class Start extends React.Component<StartProps, StartState> {
       defaultManifestRaw = manifestRawFromStorage;
     }
 
-    let importedFromUrl = false;
-
     if (uriFromUrl) {
       defaultUrl = uriFromUrl;
-      importedFromUrl = true;
     }
 
     if (manifestRawFromUrl) {
       defaultManifestRaw = manifestRawFromUrl;
-      importedFromUrl = true;
     }
 
     this.state = {
