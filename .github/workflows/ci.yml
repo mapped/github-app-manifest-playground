@@ -2,6 +2,9 @@ name: CI
 
 on: push
 
+env:
+  WORKING_DIR: ./playground
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -15,10 +18,13 @@ jobs:
 
       - name: Install packages
         run: npm ci
+        working-directory: ${{ env.WORKING_DIR }}
 
       - name: Build
         run: npm run build
+        working-directory: ${{ env.WORKING_DIR }}
 
       - name: Deploy Function App
         #if: github.ref == 'refs/heads/main'
         run: npm run deploy
+        working-directory: ${{ env.WORKING_DIR }}
