@@ -23,7 +23,10 @@
   "overrides": {
     "react-scripts": {
       "why-we-do-it": "To fix nth-check CVE. react-scripts are too lazy to do it. https://github.com/facebook/create-react-app/issues/13337#issuecomment-1693581134",
-      "@svgr/webpack": "8.1.0"
+      "@svgr/webpack": "8.1.0",
+      "why-we-do-it-again": "Again. Facebook is lazy. https://github.com/facebook/create-react-app/issues/13423#issuecomment-1826738033",
+      "nth-check": "https://registry.npmjs.org/nth-check/-/nth-check-2.1.1.tgz",
+      "postcss": "https://registry.npmjs.org/postcss/-/postcss-8.4.31.tgz"
     }
   },
   "scripts": {
