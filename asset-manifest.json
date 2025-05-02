@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/github-app-manifest-playground/static/css/main.7e2fba06.css",
-    "main.js": "/github-app-manifest-playground/static/js/main.03df0e2c.js",
+    "main.js": "/github-app-manifest-playground/static/js/main.9b1517ac.js",
     "static/js/453.d3c504ca.chunk.js": "/github-app-manifest-playground/static/js/453.d3c504ca.chunk.js",
     "static/media/logo.svg": "/github-app-manifest-playground/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/github-app-manifest-playground/index.html",
     "main.7e2fba06.css.map": "/github-app-manifest-playground/static/css/main.7e2fba06.css.map",
-    "main.03df0e2c.js.map": "/github-app-manifest-playground/static/js/main.03df0e2c.js.map",
+    "main.9b1517ac.js.map": "/github-app-manifest-playground/static/js/main.9b1517ac.js.map",
     "453.d3c504ca.chunk.js.map": "/github-app-manifest-playground/static/js/453.d3c504ca.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7e2fba06.css",
-    "static/js/main.03df0e2c.js"
+    "static/js/main.9b1517ac.js"
   ]
 }
