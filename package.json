@@ -1,6 +1,7 @@
 {
   "name": "playground",
   "version": "0.1.0",
+  "type": "module",
   "homepage": "https://mapped.github.io/github-app-manifest-playground",
   "private": true,
   "dependencies": {
