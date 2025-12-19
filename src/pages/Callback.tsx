@@ -85,7 +85,7 @@ export class Callback extends React.Component<CallbackProps, CallbackState> {
       <Container className="p-3">
         <Stack direction="vertical" gap={2}>
           <Stack direction="horizontal" gap={2}>
-            <Button variant="secondary" href={process.env.PUBLIC_URL}>
+            <Button variant="secondary" href={import.meta.env.BASE_URL}>
               Back to start
             </Button>
           </Stack>
