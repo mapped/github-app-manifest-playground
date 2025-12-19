@@ -28,7 +28,7 @@ export class Start extends React.Component<StartProps, StartState> {
     const uriFromUrl = urlParams.get("url");
     const manifestRawFromUrl = urlParams.get("manifestRaw");
 
-    window.history.pushState("", "", process.env.PUBLIC_URL);
+    window.history.pushState("", "", import.meta.env.BASE_URL);
     const redirectUrl = `${window.location.href}`;
 
     let defaultManifestRaw = JSON.stringify(

@@ -2,27 +2,22 @@ name: CI
 
 on: push
 
-env:
-  WORKING_DIR: ./playground
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: 18.x
 
       - name: Install packages
         run: npm ci
-        working-directory: ${{ env.WORKING_DIR }}
 
       - name: Build
         run: npm run build
-        working-directory: ${{ env.WORKING_DIR }}
 
       - name: Publish into gh-pages
         if: github.ref == 'refs/heads/main'
@@ -30,5 +25,5 @@ jobs:
         env:
           REPO: self
           BRANCH: gh-pages
-          FOLDER: ${{ env.WORKING_DIR }}/build
+          FOLDER: dist
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
